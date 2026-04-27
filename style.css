@@ -1,0 +1,44 @@
+body {
+    background-image: url(foto.jpeg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+background-attachment: fixed;
+
+    
+       margin:auto;
+      font-family: "Segoe UI", sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      color: rgb(255, 253, 253);
+      text-align: center;
+    }
+
+     h1 {
+      font-size: 3rem;
+      text-shadow: 0 3px 10px rgb(0, 0, 0);
+      margin-bottom: 35px;
+    }   
+
+   
+    
+    .btn {
+      display: inline-block;
+      padding: 22px 45px;
+      font-size: 1.9rem;
+      background: #b700ff;
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      border-radius: 18px;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgb(17, 0, 255);
+      transition: 0.10s;
+    }
+
+    .btn:hover { background: #493e3e4f; }
+    .btn:active { transform: scale(0.97); }
+    

@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación XV</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: #333;
+      text-align: center;
+    }.pantalla {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.activa {
+  display: flex;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff4b5c;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #e63946;
+}
+
+.formulario {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-width: 400px;
+}
+
+input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.mapa {
+  margin-top: 15px;
+}
+
+a {
+  color: #ff4b5c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>  <!-- Pantalla de inicio -->  <div id="inicio" class="pantalla activa">
+    <h1>Mis XV 🎉</h1>
+    <p>Estás invitado/a a una noche inolvidable</p>
+    <button onclick="ingresar()">Ingresar</button>
+  </div>  <!-- Pantalla de confirmación -->  <div id="confirmacion" class="pantalla">
+    <div class="formulario">
+      <h1>Confirmar asistencia</h1>
+      <p><strong>Fecha:</strong> 20 de Diciembre - 21:00 hs</p>
+      <p><strong>Salón:</strong> Salón Dorado</p>
+      <p><strong>Dirección:</strong> Av. Siempre Viva 123</p><div class="mapa">
+    <a href="https://www.google.com/maps?q=Av.+Siempre+Viva+123" target="_blank">
+      📍 Ver ubicación en Google Maps
+    </a>
+  </div>
+
+  <input type="text" placeholder="Tu nombre">
+  <br>
+  <button onclick="respuesta('si')">Voy 🎉</button>
+  <button onclick="respuesta('no')">No puedo 😢</button>
+  <p id="mensaje"></p>
+</div>
+
+  </div>  <script>
+    function ingresar() {
+      document.getElementById('inicio').classList.remove('activa');
+      document.getElementById('confirmacion').classList.add('activa');
+    }
+
+    function respuesta(opcion) {
+      const mensaje = document.getElementById('mensaje');
+      if (opcion === 'si') {
+        mensaje.textContent = '¡Gracias por confirmar! Te esperamos 🎊';
+      } else {
+        mensaje.textContent = '¡Gracias por avisar! Te vamos a extrañar 💔';
+      }
+    }
+  </script></body>
+</html> 
