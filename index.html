@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bazar "La Esquina Hogareña"</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g1:#1a4a30;--g2:#2d6e4e;--g3:#4a9167;--g4:#7dc49a;
+  --cr:#f5f0e8;--cr2:#ece5d6;
+  --acc1:#e67e22;--acc2:#c0392b;--acc3:#2980b9;--acc4:#8e44ad;
+  --txt:#1c1c1c;--muted:#4a4a4a;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#f0ebe0;color:var(--txt);line-height:1.7;overflow-x:hidden}
+
+/* ─── HERO ─── */
+.hero{background:var(--g1);color:#fff;padding:90px 6vw 70px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(74,145,103,0.35) 0%,transparent 70%)}
+.hero-tag{display:inline-block;border:1.5px solid rgba(255,255,255,0.3);border-radius:999px;padding:5px 18px;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:22px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:900;line-height:1.02;margin-bottom:16px}
+.hero h1 span{color:var(--g4)}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.65);max-width:520px;margin:0 auto 36px}
+.hero-stats{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-top:10px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#fff}
+.hero-stat .lab{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.5)}
+
+/* ─── NAV ─── */
+nav.sticky{position:sticky;top:0;z-index:100;background:var(--g2);display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;padding:12px 4vw;box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+nav.sticky a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;transition:background .2s,color .2s}
+nav.sticky a:hover{background:rgba(255,255,255,0.15);color:#fff}
+
+/* ─── PAGE LAYOUT ─── */
+.page{max-width:900px;margin:0 auto;padding:0 5vw 80px}
+
+/* ─── SECTION BLOCK ─── */
+.block{padding:64px 0 0}
+.block+.block{border-top:1px solid var(--cr2)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--g1);color:#fff;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:18px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--g4);flex-shrink:0}
+
+h2.title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--g1);margin-bottom:10px;line-height:1.15}
+.rule{width:52px;height:4px;background:linear-gradient(90deg,var(--g3),var(--g4));border-radius:2px;margin-bottom:28px}
+
+h3.sub{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--g2);margin:32px 0 12px}
+p{color:var(--muted);font-size:0.97rem;margin-bottom:14px}
+strong{color:var(--g1);font-weight:600}
+
+/* ─── CARDS ─── */
+.grid{display:grid;gap:16px;margin-top:18px}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+
+.card{background:#fff;border-radius:14px;padding:24px 20px;border:1.5px solid var(--cr2);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.1)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--g2),var(--g4))}
+.card.accent-orange::before{background:linear-gradient(90deg,var(--acc1),#f39c12)}
+.card.accent-blue::before{background:linear-gradient(90deg,var(--acc3),#3498db)}
+.card.accent-purple::before{background:linear-gradient(90deg,var(--acc4),#9b59b6)}
+.card.accent-red::before{background:linear-gradient(90deg,var(--acc2),#e74c3c)}
+
+.card-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--g2),var(--g4));display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.card.accent-orange .card-icon{background:linear-gradient(135deg,var(--acc1),#f39c12)}
+.card.accent-blue .card-icon{background:linear-gradient(135deg,var(--acc3),#3498db)}
+.card.accent-purple .card-icon{background:linear-gradient(135deg,var(--acc4),#9b59b6)}
+.card.accent-red .card-icon{background:linear-gradient(135deg,var(--acc2),#e74c3c)}
+
+.card h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--g1);margin-bottom:8px}
+.card p{font-size:0.87rem;color:var(--muted);margin:0 0 8px}
+.card p:last-child{margin:0}
+
+/* ─── TABLE ─── */
+.tbl-wrap{overflow-x:auto;margin-top:18px;border-radius:12px;border:1.5px solid var(--cr2)}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+thead tr{background:var(--g1)}
+thead th{color:#fff;text-align:left;padding:12px 16px;font-weight:600;font-size:0.85rem;letter-spacing:0.04em}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--cr2);color:var(--muted)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:rgba(0,0,0,0.02)}
+tbody tr:hover{background:rgba(45,110,78,0.05)}
+
+/* ─── HIGHLIGHT / CALLOUT ─── */
+.callout{border-radius:14px;padding:28px 30px;margin-top:22px}
+.callout-green{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff}
+.callout-green p,.callout-green strong{color:#fff}
+.callout-green strong{opacity:1;font-weight:700}
+.callout-amber{background:linear-gradient(135deg,#d35400,#e67e22);color:#fff}
+.callout-amber p,.callout-amber strong{color:#fff}
+.callout-blue{background:linear-gradient(135deg,#1a5276,#2980b9);color:#fff}
+.callout-blue p,.callout-blue strong{color:#fff}
+
+/* ─── PILL LIST ─── */
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding:0;list-style:none}
+.pills li{background:var(--g1);color:#fff;border-radius:999px;padding:7px 18px;font-size:0.83rem;font-weight:500}
+
+/* ─── STEP LIST ─── */
+.steps{list-style:none;padding:0;margin-top:18px;display:flex;flex-direction:column;gap:14px}
+.steps li{display:flex;gap:16px;align-items:flex-start}
+.step-num{min-width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g4));color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.steps li p{margin:0;font-size:0.93rem;color:var(--muted)}
+
+/* ─── FINANCE CARDS ─── */
+.fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:18px}
+.fin-card{border-radius:14px;padding:20px 18px;border-left:5px solid var(--g2)}
+.fin-card.green{background:#eaf5ee;border-left-color:var(--g2)}
+.fin-card.amber{background:#fef5e7;border-left-color:var(--acc1)}
+.fin-card.red{background:#fef0ef;border-left-color:var(--acc2)}
+.fin-card .flabel{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);margin-bottom:6px;font-weight:600}
+.fin-card .fval{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--g1);line-height:1}
+.fin-card.red .fval{color:var(--acc2)}
+.fin-card.amber .fval{color:#c0720c}
+.fin-card .fdesc{font-size:0.8rem;color:var(--muted);margin-top:6px}
+
+/* ─── COLOR BADGES ─── */
+.badge{display:inline-block;border-radius:999px;padding:3px 12px;font-size:0.74rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em}
+.badge-green{background:#d4edda;color:#155724}
+.badge-amber{background:#fff3cd;color:#856404}
+.badge-blue{background:#cce5ff;color:#004085}
+.badge-red{background:#f8d7da;color:#721c24}
+.badge-purple{background:#e2d9f3;color:#6f42c1}
+
+/* ─── SECTION HERO BANDS ─── */
+.band{border-radius:16px;padding:28px 28px 20px;margin-bottom:28px}
+.band-green{background:linear-gradient(135deg,#eaf5ee,#d0edd8)}
+.band-amber{background:linear-gradient(135deg,#fef9ed,#fdecc8)}
+.band-blue{background:linear-gradient(135deg,#eaf3fb,#cce5ff)}
+
+/* ─── FORMULA ─── */
+.formula{background:var(--cr);border:1.5px solid var(--cr2);border-radius:12px;padding:18px 22px;margin:14px 0;text-align:center;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--g1)}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─── FOOTER ─── */
+footer{background:var(--g1);color:rgba(255,255,255,0.5);text-align:center;padding:28px 5vw;font-size:0.78rem;letter-spacing:0.06em;margin-top:0}
+footer span{color:var(--g4);font-weight:600}
+
+@media(max-width:600px){
+  nav.sticky a{font-size:0.68rem;padding:3px 8px}
+  .hero-stats{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-tag">Economía de la Empresa</div>
+  <h1>Bazar<br><span>"La Esquina Hogareña"</span></h1>
+  <p class="hero-sub">Análisis empresarial completo: áreas funcionales, producto, marketing y economía</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">20</div><div class="lab">puestos de trabajo</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="lab">canales de venta</div></div>
+    <div class="hero-stat"><div class="num">4P</div><div class="lab">estrategia marketing</div></div>
+    <div class="hero-stat"><div class="num">$15M</div><div class="lab">capital inicial</div></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky">
+  <a href="#areas">Áreas Funcionales</a>
+  <a href="#clientes">Clientes</a>
+  <a href="#admin">Administración</a>
+  <a href="#financiamiento">Financiamiento</a>
+  <a href="#ciclovida">Ciclo de Vida</a>
+  <a href="#3p">Estrategia 3P</a>
+  <a href="#4p">Marketing 4P</a>
+  <a href="#economico">Análisis Económico</a>
+</nav>
+
+<div class="page">
+
+<!-- ══════ ÁREAS FUNCIONALES ══════ -->
+<section class="block reveal" id="areas">
+  <div class="eyebrow"><span class="dot"></span>Áreas Funcionales</div>
+  <h2 class="title">La empresa y sus áreas funcionales</h2>
+  <div class="rule"></div>
+
+  <h3 class="sub">Recursos Humanos</h3>
+  <p>La estructura organizativa cuenta con un total de <strong>20 puestos</strong> divididos en tres niveles jerárquicos:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Nivel</th><th>Puesto / Cargo</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-purple">Estratégico</span></td><td>1 Gerente General</td></tr>
+        <tr><td><span class="badge badge-blue">Táctico</span></td><td>1 Administrador, 1 Supervisor de Ventas, 1 Encargado de Compras, 1 de Depósito</td></tr>
+        <tr><td><span class="badge badge-green">Operativo</span></td><td>7 vendedores, 2 cajeros, auxiliares y operarios</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Producción</h3>
+  <p>El área de operaciones produce utilidad de tiempo, lugar y posesión. Su proceso básico:</p>
+
+  <div class="grid grid-3">
+    <div class="card accent-blue">
+      <div class="card-icon">📍</div>
+      <h4>Utilidad de Lugar</h4>
+      <p>Traer mercadería desde los grandes centros mayoristas del país y ponerla a disposición en el centro de La Rioja.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">⏱️</div>
+      <h4>Utilidad de Tiempo</h4>
+      <p>Lograr que cuando el cliente necesite un producto, este ya se encuentre exhibido en la góndola, eliminando los tiempos de espera del envío.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h4>Utilidad de Posesión</h4>
+      <p>Facilitar la transferencia de la propiedad del producto al consumidor final mediante una línea de cajas rápida y diversos medios de pago.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CLIENTES ══════ -->
+<section class="block reveal" id="clientes">
+  <div class="eyebrow"><span class="dot"></span>Comercial</div>
+  <h2 class="title">¿Cómo se vende?</h2>
+  <div class="rule"></div>
+
+  <p>El proceso de venta se ejecuta a través de <strong>tres canales principales</strong>:</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon">🏪</div>
+      <h4>Venta Directa en Salón</h4>
+      <p>El canal principal de comercialización.</p>
+      <span class="badge badge-green">Canal principal</span>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">💬</div>
+      <h4>Venta Digital y Catálogo Remoto</h4>
+      <p>A través de WhatsApp Business.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">📱</div>
+      <h4>Venta por Redes Sociales</h4>
+      <p>Social Selling en Instagram y Facebook.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">¿Quiénes son los clientes?</h3>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <h4>Jefes/as de Hogar y Familias Medianas</h4>
+      <span class="badge badge-green" style="margin-bottom:10px;display:inline-block">Cliente principal</span>
+      <p><strong>Perfil:</strong> Hombres y mujeres de entre 25 y 65 años.</p>
+      <p><strong>Características psicográficas:</strong> Valoran el orden, el confort familiar y buscan que su hogar sea un espacio agradable.</p>
+      <p><strong>Comportamiento de compra:</strong> Visitan el local físico principalmente los fines de semana o después del horario laboral.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🎓</div>
+      <h4>Estudiantes Universitarios e Inquilinos Jóvenes</h4>
+      <p><strong>Perfil:</strong> Jóvenes de 18 a 28 años.</p>
+      <p><strong>Características psicográficas:</strong> Disponen de presupuestos más ajustados y espacios habitacionales reducidos.</p>
+      <p><strong>Comportamiento de compra:</strong> Son nativos digitales. Utilizan activamente las redes sociales (Instagram) y WhatsApp para consultar precios, stock y disponibilidad de envío a domicilio antes de efectuar la compra.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">☕</div>
+      <h4>Pequeños Emprendedores Gastronómicos y Oficinas</h4>
+      <span class="badge badge-amber" style="margin-bottom:10px;display:inline-block">Cliente corporativo</span>
+      <p><strong>Perfil:</strong> Dueños de pequeñas cafeterías, rotiserías, institutos de enseñanza o dependencias de la administración pública riojana.</p>
+      <p><strong>Características:</strong> Necesitan equipar sus espacios comunes (cocinas de oficinas) o insumos básicos de vajilla.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ADMINISTRACIÓN ══════ -->
+<section class="block reveal" id="admin">
+  <div class="eyebrow"><span class="dot"></span>Administración</div>
+  <h2 class="title">Administración</h2>
+  <div class="rule"></div>
+
+  <p>Internamente, el área administrativa se subdivide en <strong>tres tareas críticas</strong>:</p>
+
+  <ol class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <p><strong>Gestión de Información y Contabilidad:</strong> Registro de asientos contables, conciliaciones bancarias, control de flujo de caja diario (cash flow), emisión de facturas y preparación de la documentación para el estudio contable externo (liquidación de impuestos).</p>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <p><strong>Gestión de Stock y Suministros:</strong> Control de inventarios mediante auditorías cruzadas (lo que dice el sistema vs. lo que hay físicamente en el depósito).</p>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <p><strong>Gestión de Personal y Haberes:</strong> Control de asistencia del personal operativo (vendedores, cajeros, limpieza), confección de las novedades para la liquidación de sueldos y control del cumplimiento de las normativas laborales.</p>
+    </li>
+  </ol>
+
+  <h3 class="sub">¿Quién toma las decisiones?</h3>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Nivel</th><th>Responsable</th><th>Decisiones</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-purple">Estratégico · Largo plazo</span></td><td>Gerente General</td><td>Alianzas, inversiones, presupuesto anual.</td></tr>
+        <tr><td><span class="badge badge-blue">Táctico · Mediano Plazo</span></td><td>Administrador / Encargados de Área</td><td>Selección de proveedores, campañas de marketing.</td></tr>
+        <tr><td><span class="badge badge-green">Operativo · Corto Plazo / Diario</span></td><td>Supervisor de ventas / Cajeros / Repositores</td><td>Cambio de productos, atención de quejas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════ FINANCIAMIENTO ══════ -->
+<section class="block reveal" id="financiamiento">
+  <div class="eyebrow"><span class="dot"></span>Finanzas</div>
+  <h2 class="title">Financiamiento</h2>
+  <div class="rule"></div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <h4>Capital Propio (Financiamiento Interno)</h4>
+      <p>Es el dinero aportado por los dueños para dar nacimiento y solidez a la estructura del negocio.</p>
+      <p><strong>Capital Social Inicial:</strong> La empresa se constituye con un aporte genuino de <strong>$15.000.000</strong> en efectivo, integrado en su totalidad por los socios de la S.R.L.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">🔄</div>
+      <h4>Reinversión de Utilidades</h4>
+      <p>Una vez que el bazar comience a generar ganancias netas, la política de la empresa establece que el <strong>40% de los beneficios contables</strong> no se distribuirán entre los socios, sino que se retendrán para autofinanciar el crecimiento del negocio.</p>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-icon">🏭</div>
+      <h4>Crédito Comercial (Financiamiento de Proveedores)</h4>
+      <span class="badge badge-purple" style="margin-bottom:10px;display:inline-block">Más importante del día a día</span>
+      <p>Tras negociar con los proveedores mayoristas de Buenos Aires y Rosario, se obtuvieron plazos de pago a <strong>30, 60 y 90 días</strong> mediante cuenta corriente comercial.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🏦</div>
+      <h4>Crédito Bancario y Financiero</h4>
+      <p>La empresa cuenta con una cuenta corriente corporativa en el <strong>Banco de la Nación Argentina</strong> (sucursal La Rioja).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CICLO DE VIDA ══════ -->
+<section class="block reveal" id="ciclovida">
+  <div class="eyebrow"><span class="dot"></span>Producto</div>
+  <h2 class="title">Producto y su ciclo de vida</h2>
+  <div class="rule"></div>
+
+  <div class="band band-green">
+    <h3 class="sub" style="margin-top:0">Producto principal</h3>
+    <p>El producto principal de la empresa consiste en la comercialización de <strong>artículos para el hogar, cocina, decoración, organización, limpieza y bazar</strong>. Estos productos están dirigidos a familias, estudiantes, jóvenes independientes y pequeños emprendimientos que buscan equipar y mejorar sus hogares o espacios de trabajo.</p>
+  </div>
+
+  <h3 class="sub">Etapa del ciclo de vida</h3>
+  <p>La empresa se encuentra actualmente en la <span class="badge badge-amber">Etapa de Madurez</span></p>
+
+  <h3 class="sub">Justificación</h3>
+  <p>Se considera que el negocio se encuentra en la etapa de madurez porque existe una gran cantidad de competidores en el mercado, como supermercados, bazares tradicionales y comercios especializados. Los consumidores conocen perfectamente los productos ofrecidos y no requieren información adicional para comprender su utilidad. Además, las ventas son relativamente estables y el crecimiento del mercado es moderado, características propias de esta etapa.</p>
+
+  <h3 class="sub">El Rubro del Bazar: Etapa de Madurez</h3>
+  <div class="grid grid-3">
+    <div class="card accent-red">
+      <div class="card-icon">⚔️</div>
+      <h4>Saturación de Competidores</h4>
+      <p>Existe una gran cantidad de competidores consolidados (grandes supermercados, tiendas tradicionales y pequeños bazares de barrio) disputando activamente los mismos clientes.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🧠</div>
+      <h4>Conocimiento del Consumidor</h4>
+      <p>Los compradores riojanos conocen ampliamente este tipo de productos, manejan precios de referencia y no necesitan ser educados sobre el uso.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">📊</div>
+      <h4>Estabilización de Ventas</h4>
+      <p>Las ventas a nivel general en este rubro son relativamente estables y su tasa de crecimiento es moderada.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">¿Cuál es el área más crítica para que la empresa funcione bien?</h3>
+  <div class="callout callout-green">
+    <p style="font-size:1rem;margin-bottom:10px"><strong>El área más crítica es Comercial</strong>, porque es la encargada de generar las ventas que permiten sostener todas las demás áreas de la empresa.</p>
+    <p>Si no se venden productos, no ingresan recursos para pagar salarios, reponer mercadería, afrontar gastos operativos ni realizar inversiones. Además, el área comercial mantiene el contacto directo con los clientes, detecta sus necesidades y contribuye a la fidelización. Por estas razones, su correcto funcionamiento resulta fundamental para la supervivencia y crecimiento del bazar.</p>
+  </div>
+
+  <h3 class="sub">Decisiones para la próxima etapa</h3>
+  <p>Cuando la empresa avance hacia una etapa de declive deberá implementar estrategias para mantener su competitividad. Algunas decisiones importantes serán:</p>
+  <ul class="pills">
+    <li>Incorporar nuevos productos</li>
+    <li>Modernizar la imagen del local</li>
+    <li>Fortalecer las ventas digitales</li>
+    <li>Comercio electrónico</li>
+    <li>Ofrecer promociones especiales</li>
+    <li>Desarrollar programas de fidelización</li>
+  </ul>
+</section>
+
+<!-- ══════ ESTRATEGIA 3P ══════ -->
+<section class="block reveal" id="3p">
+  <div class="eyebrow"><span class="dot"></span>Producción</div>
+  <h2 class="title">Estrategia de Producción (Las 3P)</h2>
+  <div class="rule"></div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-icon">🛍️</div>
+      <h4>Producto</h4>
+      <p>"La Esquina Hogareña" comercializa una amplia variedad de artículos para el hogar, cocina, organización y decoración. Sus principales atributos diferenciales son la variedad de productos, la calidad de los artículos seleccionados, la disponibilidad inmediata y la atención personalizada brindada a los clientes.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">⚙️</div>
+      <h4>Proceso</h4>
+      <p>El proceso de comercialización comienza con la compra de mercadería a proveedores mayoristas ubicados en diferentes provincias del país. Luego los productos son transportados al depósito de la empresa, donde se controlan, clasifican y almacenan. Posteriormente son exhibidos en las góndolas y puestos a disposición de los clientes. Este proceso es <strong>semi-industrial</strong> porque combina tareas logísticas, almacenamiento, organización y comercialización a gran escala.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🏢</div>
+      <h4>Planta</h4>
+      <p>La empresa opera en un local comercial ubicado en el <strong>centro de la ciudad de La Rioja</strong>. Esta ubicación fue elegida debido a la gran circulación de personas, la facilidad de acceso y la cercanía con otros comercios. La capacidad instalada permite almacenar una amplia cantidad de productos y atender entre <strong>50 y 100 clientes por día</strong>, garantizando un adecuado nivel de servicio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ MARKETING 4P ══════ -->
+<section class="block reveal" id="4p">
+  <div class="eyebrow"><span class="dot"></span>Marketing</div>
+  <h2 class="title">Estrategia de Marketing (Las 4P)</h2>
+  <div class="rule"></div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-icon">🛒</div>
+      <h4>Producto</h4>
+      <p>La empresa se diferencia de la competencia por ofrecer una <strong>gran variedad de artículos para el hogar</strong> en un solo lugar, con atención personalizada y disponibilidad inmediata. Cuenta con una marca reconocible denominada "La Esquina Hogareña" y ofrece <strong>garantía de cambio</strong> para productos con defectos de fabricación.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">🏷️</div>
+      <h4>Precio</h4>
+      <span class="badge badge-amber" style="margin-bottom:10px;display:inline-block">Penetración de mercado</span>
+      <p>La estrategia de precios utilizada es la de <strong>penetración de mercado</strong>. Consiste en ofrecer precios competitivos y accesibles para atraer una mayor cantidad de clientes y ganar participación frente a otros bazares y supermercados de la ciudad.</p>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🗺️</div>
+      <h4>Plaza</h4>
+      <p>La distribución de los productos se realiza mediante distintos canales:</p>
+      <ul style="margin-top:8px;padding-left:18px;color:var(--muted);font-size:0.88rem;line-height:2">
+        <li>Venta directa en el local comercial</li>
+        <li>Atención por WhatsApp Business</li>
+        <li>Publicaciones en Instagram</li>
+        <li>Publicaciones en Facebook</li>
+        <li>Entregas a domicilio dentro de la ciudad de La Rioja</li>
+      </ul>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-icon">📣</div>
+      <h4>Promoción</h4>
+      <p>La empresa utiliza diversas herramientas promocionales para captar clientes y aumentar las ventas:</p>
+      <ul style="margin-top:8px;padding-left:18px;color:var(--muted);font-size:0.88rem;line-height:2">
+        <li>Publicidad en redes sociales</li>
+        <li>Sorteos y concursos</li>
+        <li>Promociones por fechas especiales</li>
+        <li>Descuentos para clientes frecuentes</li>
+        <li>Campañas de difusión mediante WhatsApp Business</li>
+      </ul>
+      <p style="margin-top:10px;font-size:0.86rem">Estas acciones permiten llegar al público objetivo de manera rápida y económica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ANÁLISIS ECONÓMICO ══════ -->
+<section class="block reveal" id="economico">
+  <div class="eyebrow"><span class="dot"></span>Economía</div>
+  <h2 class="title">Análisis Económico</h2>
+  <div class="rule"></div>
+
+  <h3 class="sub">Escenario A</h3>
+
+  <div class="fin-grid">
+    <div class="fin-card green">
+      <div class="flabel">Beneficio Contable</div>
+      <div class="fval">$500.000</div>
+      <div class="fdesc">Ganancia mensual obtenida por la empresa.</div>
+    </div>
+    <div class="fin-card amber">
+      <div class="flabel">Costo de Oportunidad</div>
+      <div class="fval">$600.000</div>
+      <div class="fdesc">El dueño podría trabajar en relación de dependencia y obtener este salario mensual.</div>
+    </div>
+    <div class="fin-card red">
+      <div class="flabel">Beneficio Económico</div>
+      <div class="fval">-$100.000</div>
+      <div class="fdesc">Beneficio Económico = Beneficio Contable − Costo de Oportunidad</div>
+    </div>
+  </div>
+
+  <div class="formula">Beneficio Económico = $500.000 − $600.000 = <strong style="color:var(--acc2)">-$100.000</strong></div>
+
+  <div class="callout callout-green" style="margin-top:16px">
+    <p style="margin-bottom:10px"><strong>Conclusión:</strong> Aunque la empresa presenta ganancias contables, económicamente no resulta rentable porque el propietario está dejando de ganar $100.000 por mes respecto de la alternativa laboral disponible.</p>
+    <p><strong>Recomendación:</strong> La empresa debería continuar únicamente si existen perspectivas de crecimiento futuro que permitan aumentar sus ganancias. De lo contrario, sería más conveniente aceptar el empleo en relación de dependencia.</p>
+  </div>
+
+  <h3 class="sub" style="margin-top:48px">Escenario B</h3>
+
+  <div class="grid grid-2">
+    <div class="card accent-blue">
+      <div class="card-icon">🔧</div>
+      <h4>Alternativa 1: Comprar una máquina nueva</h4>
+      <p>Costo: <strong>$1.200.000</strong>. Al elegir esta opción, se renuncia a los beneficios que podría generar el nuevo local.</p>
+    </div>
+    <div class="card accent-orange">
+      <div class="card-icon">📦</div>
+      <h4>Alternativa 2: Alquilar un local más conveniente</h4>
+      <p>Utilizando el mismo dinero (<strong>$1.200.000</strong>). Al elegir esta opción, se renuncia al aumento de productividad que podría generar la máquina.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:16px">
+    <div class="card">
+      <h4>Costo de Oportunidad</h4>
+      <p>Si se compra la máquina, se renuncia a los beneficios que podría generar el nuevo local. Si se alquila el nuevo local, se renuncia al aumento de productividad que podría generar la máquina.</p>
+    </div>
+    <div class="card accent-purple">
+      <h4>Beneficio Contable y Económico</h4>
+      <p><strong>Beneficio Contable:</strong> Dependerá de los ingresos adicionales generados por cada alternativa.</p>
+      <p><strong>Beneficio Económico:</strong> Debe evaluarse considerando no sólo los ingresos obtenidos sino también el beneficio perdido por no elegir la otra opción.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-blue" style="margin-top:20px">
+    <p><strong>Recomendación:</strong> La empresa debería elegir la alternativa que genere mayor rentabilidad futura. Si el nuevo local permite aumentar significativamente las ventas, convendrá mudarse. Si la máquina reduce costos y mejora la productividad de forma importante, será más conveniente adquirirla. En este caso, se recomienda el <strong>alquiler del nuevo local</strong> porque una mejor ubicación suele generar un incremento directo de clientes y ventas.</p>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<footer>
+  <p>Bazar <span>"La Esquina Hogareña"</span> · Economía de la Empresa · La Rioja, Argentina</p>
+</footer>
+
+<script>
+const els=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:0.08});
+els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
